@@ -12,8 +12,7 @@ public class Student extends AppCompatActivity {
     FloatingActionButton fab;
     ListView listView;
     // Array of strings...
-    String[] mobileArray = {"Android","IPhone","WindowsMobile","Blackberry",
-            "WebOS","Ubuntu","Windows7","Max OS X"};
+    String[] mobileArray = {"Demande d'attestation de presence ","Mise a jour emploi ","Mise a jour des note",};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

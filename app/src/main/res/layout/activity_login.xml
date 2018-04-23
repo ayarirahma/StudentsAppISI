@@ -2,7 +2,8 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
     android:background="@color/colorPrimary"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:id="@+id/login_layout">
 
     <Space
         android:layout_width="match_parent"
@@ -28,6 +29,7 @@
         android:layout_marginRight="32dp"
         android:inputType="text"
         android:maxLines="1"
+        android:alpha="0.5"
         android:background="@drawable/edittext_login_form"
         android:id="@+id/login_username"
         android:hint="Username"/>
@@ -38,6 +40,7 @@
         android:textColorHint="@color/Lavender"
         android:maxLines="1"
         android:inputType="textPassword"
+        android:alpha="0.5"
         android:layout_marginLeft="32dp"
         android:layout_marginTop="8dp"
         android:layout_marginRight="32dp"
@@ -46,7 +49,7 @@
         android:hint="Password"/>
 
     <Button
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="40dp"
         android:layout_gravity="center_horizontal"
         android:maxLines="1"
@@ -68,5 +71,6 @@
         android:layout_marginRight="16dp"
         android:textColor="@color/White"
         android:text="Register"/>
+
 
 </LinearLayout>

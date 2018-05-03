@@ -2,15 +2,12 @@ package com.example.geekhamza.isi;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.support.design.widget.FloatingActionButton;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Base64;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
@@ -28,93 +25,51 @@ import org.json.JSONArray;
 import java.util.HashMap;
 import java.util.Map;
 
-import api.task;
+import api.Process;
 
-public class Student extends AppCompatActivity  {
-    FloatingActionButton fab;
+public class AllProcess extends AppCompatActivity {
     ListView listView;
+    String[] name_array ;
+    SwipeRefreshLayout swipeRefreshLayout;
     String login;
     String psw;
-    SwipeRefreshLayout swipeRefreshLayout;
-    // Array of strings...
-    String[] name_array ;
-    task[] t;
-    Menu menu;
-     @Override
+    Process[]t;
+
+
+
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_student);
-       fab = findViewById(R.id.student_fab);
-       listView=findViewById(R.id.student_list_view);
-       swipeRefreshLayout=findViewById(R.id.student_activity_swiperefresh);
-       download_tasks();
-
-        fab.setOnClickListener(new View.OnClickListener() {
+        setContentView(R.layout.activity_all_process);
+        listView=findViewById(R.id.allprocess_list_view);
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
-            public void onClick(View view) {
-                Intent intent=new Intent(getApplicationContext(),AllProcess.class);
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                Intent intent=new Intent(getApplicationContext(),AddDemande.class);
+                intent.putExtra("key",t[i].getKey());
                 startActivity(intent);
-
-
+                AllProcess.this.finish();
             }
         });
-        swipeRefreshLayout.setOnRefreshListener(
-                new SwipeRefreshLayout.OnRefreshListener() {
-                    @Override
-                    public void onRefresh() {
-
-                        // This method performs the actual data-refresh operation.
-                        // The method calls setRefreshing(false) when it's finished.
-                        download_tasks();
-                    }
-                });
-
-
+        swipeRefreshLayout=findViewById(R.id.allprocess_activity_swiperefresh);
+        download_tasks();
     }
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.main_menu, menu);
-        return true;
-    }
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            // action with ID action_refresh was selected
-            case R.id.logout:
-                Toast.makeText(this, "Logout", Toast.LENGTH_SHORT)
-                        .show();
-                break;
-            // action with ID action_settings was selected
-            case R.id.help:
-                Toast.makeText(this, "Help", Toast.LENGTH_SHORT)
-                        .show();
-                break;
-            default:
-                break;
-        }
-
-        return true;
-    }
-
 
     private void download_tasks() {
         SharedPreferences prefs = getSharedPreferences("pref", MODE_PRIVATE);
-         login = prefs.getString("login", "hamza");
-         psw = prefs.getString("psw", "hamza");
-        Toast.makeText(Student.this, login, Toast.LENGTH_SHORT).show();
+        login = prefs.getString("login", "hamza");
+        psw = prefs.getString("psw", "hamza");
+        Toast.makeText(AllProcess.this, login, Toast.LENGTH_SHORT).show();
 
-        String url = "http://bps.isiforge.tn:8080/engine-rest/task?processDefinitionKey=dmd_dbl_corr";
+        String url = "http://bps.isiforge.tn:8080/engine-rest/process-definition?latest=true";
 
         JsonArrayRequest JsonArrayRequest = new JsonArrayRequest
                 (Request.Method.GET, url, null, new Response.Listener<JSONArray>() {
-
-
                     @Override
                     public void onResponse(JSONArray response) {
-                        Toast.makeText(Student.this, response.toString(), Toast.LENGTH_SHORT).show();
+                        Toast.makeText(AllProcess.this, response.toString(), Toast.LENGTH_SHORT).show();
                         if(response.toString().length()==0){
-                            Toast.makeText(Student.this, "An empty response recived , please try again ", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(AllProcess.this, "An empty response recived , please try again ", Toast.LENGTH_SHORT).show();
                             swipeRefreshLayout.setRefreshing(false);
 
                         }
@@ -122,11 +77,11 @@ public class Student extends AppCompatActivity  {
                             Gson gson = new GsonBuilder().serializeNulls().create();
 
                             try{
-                                t=gson.fromJson(response.toString(),task[].class);
-                                 name_array = new String[t.length];
-                                   for(int i=0;i<t.length;i++) {
-                                       name_array[i]=t[i].getName();
-                                       //Toast.makeText(Student.this, t[i].getId(), Toast.LENGTH_SHORT).show();
+                                t=gson.fromJson(response.toString(),Process[].class);
+                                name_array = new String[t.length];
+                                for(int i=0;i<t.length;i++) {
+                                    name_array[i]=t[i].getName();
+                                    //Toast.makeText(Student.this, t[i].getId(), Toast.LENGTH_SHORT).show();
                                 }
                                 if(name_array.length>0) {
                                     ArrayAdapter adapter = new ArrayAdapter<String>(getApplicationContext(),
@@ -136,7 +91,7 @@ public class Student extends AppCompatActivity  {
 
 
                             }catch (Exception e){
-                                Toast.makeText(Student.this, "error parsing "
+                                Toast.makeText(AllProcess.this, "error parsing "
                                         , Toast.LENGTH_SHORT).show();
 
                             }
@@ -185,5 +140,4 @@ public class Student extends AppCompatActivity  {
 
 
 
-    }
-
+}

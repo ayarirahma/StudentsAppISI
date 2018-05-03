@@ -1,3 +1,39 @@
 <resources>
+    <string-array name="niveau_array">
+        <item value="l1sil">l1sil</item>
+        <item value="l2sil">l2sil</item>
+        <item value="l3sil" >l3sil</item>
+        <item value="l1ars">l1ars</item>
+        <item value="l2ars">l2ars</item>
+        <item value="l3ars">l3ars</item>
+        <item value="l1se">l1se</item>
+        <item value="l2se" >l2se</item>
+        <item value="l3se">l3se</item>
+        <item value="m1ssice" >m1ssice</item>
+        <item value="m1rech">m1rech</item>
+        <item value="m2siiva">m2siiva</item>
+        <item value="m2gl">m2gl</item>
+        <item value="ing1">ing1</item>
+        <item value="ing2">ing2</item>
+        <item value="ing3">ing3</item>
+    </string-array>
+
     <string name="app_name">ISI</string>
+    <string name="action_settings">Settings</string>
+    <string name="hint_name">Full Name</string>
+    <string name="hint_Last_name">Full Name</string>
+    <string name="level">level</string>
+    <string name="matiere">Module</string>
+    <string name="group">Group</string>
+    <string name="hint_email">Email</string>
+    <string name="hint_password">Password</string>
+    <string name="btn_sign_up">Sign Up</string>
+    <string name="err_msg_name">Enter your full name</string>
+    <string name="err_msg_email">Enter valid email address</string>
+    <string name="err_msg_password">Enter the password</string>
+    <string name="logout">logout</string>
+    <string name="hint_comment">Comment</string>
+    <string name="hint_module">Module</string>
+    <string name="hint_group">Group</string>
+    <string name="Send">Send</string>
 </resources>

@@ -35,7 +35,7 @@ android:id="@+id/login_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="text"
-            android:hint="Login" />
+            android:hint="@string/hint_name" />
     </android.support.design.widget.TextInputLayout>
 
     <!-- Password Label -->
@@ -48,7 +48,7 @@ android:id="@+id/login_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="textPassword"
-            android:hint="Password"/>
+            android:hint="@string/hint_password"/>
     </android.support.design.widget.TextInputLayout>
 
     <android.support.v7.widget.AppCompatButton
